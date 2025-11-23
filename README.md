@@ -1,4 +1,4 @@
-# O-MLTED
+# omlta/omltd
 
 This repository contains an implementation of omlta, the optimal multi-label tree alignment problem, and omltd, the optimal multi-label tree edit distance. The provided script computes both the minimum cost edit sequence for the alignment as well as the distance between two input trees.
 
@@ -41,3 +41,4 @@ The output includes four things. We discuss them in the order they are output (s
 
 
 4. The normalized omltd distance, i.e., the omlta distance divided by the total number of labels in the two input forests after pre-processing. 
+
