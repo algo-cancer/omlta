@@ -31,7 +31,7 @@ Normalized omltd:  0.29411764705882354
 ```
 
 ## Output
-The output includes four things. We discuss them in the order they are output (see example above).
+The output includes four main pieces of information. We discuss them in the order they are output (see example above).
 
 1. A minimum cost edit sequence on the two input forests. The sequence is provided as a list of tuples.  The first element of the tuple corresponds to the type of edit.  'nd' - node deletion, 'ne' - node expansion, 'ld' - label deletion.  The second element of the tuple is the key of the node used to identify which node in the tree is being edited.  The third element of the tuple is the set of labels either being expanded or deleted.
 
@@ -41,5 +41,6 @@ The output includes four things. We discuss them in the order they are output (s
 
 
 4. The normalized omltd distance, i.e., the omlta distance divided by the total number of labels in the two input forests after pre-processing. 
+
 
 
