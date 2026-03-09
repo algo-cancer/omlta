@@ -1,0 +1,8 @@
+name: omlta
+channels:
+  - http://conda.anaconda.org/dranew
+  - conda-forge
+dependencies:
+  - python=3.13
+  - numpy
+prefix: /Users/wuchh/miniforge3/envs/omlta
