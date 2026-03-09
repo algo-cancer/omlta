@@ -8,7 +8,7 @@ omlta.py requires two text files each specifying one of the two input trees. The
 
 The root node id should be ROOT with parent None.
 
-The labels should be comma-separated, no white space.  See example-tree1.txt and example-tree2.txt for an example.
+The labels should be comma-separated, no white space.  See [example-tree1.txt](https://github.com/algo-cancer/omlta/blob/main/example-tree1.txt) and [example-tree2.txt](https://github.com/algo-cancer/omlta/blob/main/example-tree2.txt) for an example.
 
 Labels do not need to be shared between the two trees.  Any labels unique to only one of the input tree files are removed by the OMLTED.py algorithm in a pre-processing step.
 
@@ -41,4 +41,5 @@ The output includes four things. We discuss them in the order they are output (s
 
 
 4. The normalized omltd distance, i.e., the omlta distance divided by the total number of labels in the two input forests after pre-processing. 
+
 
