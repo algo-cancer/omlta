@@ -14,7 +14,7 @@ Labels do not need to be shared between the two trees.  Any labels unique to onl
 
 ## Usage
 
-This script is made in Python 3, and requires these [dependencies](https://github.com/algo-cancer/omlta/blob/main/requirements.txt). To run the omlta/omltd implementation:
+This script is made in Python 3, and requires these [dependencies](https://github.com/algo-cancer/omlta/blob/main/requirements.txt). Installation should take no more than 5 minutes. To run the omlta/omltd implementation:
 
 ```python omlta.py tree-file1 tree-file2```
 
@@ -29,7 +29,7 @@ Non-common labels deleted in pre-processing:  0
 omltd:  10
 Normalized omltd:  0.29411764705882354
 ```
-
+Execution of the example trees took .01 seconds.
 ## Output
 The output includes four main pieces of information. We discuss them in the order they are output (see example above).
 
@@ -41,6 +41,7 @@ The output includes four main pieces of information. We discuss them in the orde
 
 
 4. The normalized omltd distance, i.e., the omlta distance divided by the total number of labels in the two input forests after pre-processing. 
+
 
 
 
