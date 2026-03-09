@@ -14,7 +14,7 @@ Labels do not need to be shared between the two trees.  Any labels unique to onl
 
 ## Usage
 
-This script is made in Python 3, and requires these [dependencies](https://github.com/algo-cancer/omlta/blob/main/requirements.txt). Installation should take no more than 5 minutes. To run the omlta/omltd implementation:
+This script is made in Python 3. Installation should take no more than 5 minutes using the provided .yml to create the conda environment. To run the omlta/omltd implementation in the omlta conda environment:
 
 ```python omlta.py tree-file1 tree-file2```
 
@@ -41,6 +41,7 @@ The output includes four main pieces of information. We discuss them in the orde
 
 
 4. The normalized omltd distance, i.e., the omlta distance divided by the total number of labels in the two input forests after pre-processing. 
+
 
 
 
