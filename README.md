@@ -10,7 +10,7 @@ The root node id should be ROOT with parent None.
 
 The labels should be comma-separated, no white space.  See [example-tree1.txt](https://github.com/algo-cancer/omlta/blob/main/example-tree1.txt) and [example-tree2.txt](https://github.com/algo-cancer/omlta/blob/main/example-tree2.txt) for an example.
 
-Labels do not need to be shared between the two trees.  Any labels unique to only one of the input tree files are removed by the OMLTED.py algorithm in a pre-processing step.
+Labels do not need to be shared between the two trees.  Any labels unique to only one of the input tree files are removed by the omlta.py algorithm in a pre-processing step.
 
 ## Usage
 
@@ -20,7 +20,7 @@ This script is made in Python 3. Installation should take no more than 5 minutes
 
 Sample execution on the included example tree files:
 ```
-C:\OMLTED python omlta.py example-tree1.txt example-tree2.txt
+C:\omlta python omlta.py example-tree1.txt example-tree2.txt
 Checking k =   16
 Finished k =  16
 Minimum cost edit sequence:
