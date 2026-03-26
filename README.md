@@ -12,9 +12,18 @@ The labels should be comma-separated, no white space.  See [example-tree1.txt](h
 
 Labels do not need to be shared between the two trees.  Any labels unique to only one of the input tree files are removed by the omlta.py algorithm in a pre-processing step.
 
+## Installation
+This script is made in Python 3.  Installation should take no more than 5 minutes using the provided .yml to create the conda environment as follows:
+
+```conda env create -f environment.yml```
+
 ## Usage
 
-This script is made in Python 3. Installation should take no more than 5 minutes using the provided .yml to create the conda environment. To run the omlta/omltd implementation in the omlta conda environment:
+To run the omlta/omltd implementation in the omlta conda environment, first activate the environment as follows:
+
+```conda activate omlta ```
+
+Then, navigate to the directory containing the omlta.py script and tree input files, and run the following:
 
 ```python omlta.py tree-file1 tree-file2```
 
