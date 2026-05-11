@@ -89,6 +89,8 @@ def sorted_intersection(l1, l2):
             j += 1
     return intersection  
 
+#remove_sorted takes two sorted lists l and r and
+#returns a "copy" of l in which all elements that are in r have been deleted
 def remove_sorted(l, r):
     i = 0
     j = 0
@@ -107,6 +109,8 @@ def remove_sorted(l, r):
         i += 1
     return new_l      
 
+#concat_sorted takes two sorted lists l and a and returns a sorted lists that combines them
+#if an element appears one time each in both l and and a, it will apear twice in the returned list
 def concat_sorted(l, a):
     i = 0
     j = 0
@@ -120,6 +124,9 @@ def concat_sorted(l, a):
             j += 1
     return new_l
 
+
+#post_order traverses the nodes of a tree and returns a list of the nodes
+# such that a parent node appears after its children
 def post_order(r):
     post = []
     q = deque([r])
@@ -130,6 +137,8 @@ def post_order(r):
     post.reverse()
     return post
 
+#compute_labels takes one argument, which is a labeled tumor phylogenetic tree, r and
+# it returns a list of the labels occurring in any node of the tree
 def compute_labels(r):
     nodes = deque([r])
     labels = []
@@ -219,7 +228,10 @@ def nearest_branching(v):
     return path, curr
     
 #Can be improved by searching children more explicitly
-#Note that node expansion requires considering non-branching nodes separately  
+#Note that node expansion requires considering non-branching nodes separately
+#check_if_eq takes two arguments, which are rooted trees, r_F and r_G, and
+#it actually computes a distance in the two-dimensional list variable con_dist
+#and returns the value con_dist[r_F.key][r_G.key]
 def check_if_eq(r_F, r_G):
     #print("Check if eq", file=f_wr)
     post_F = post_order(r_F)
@@ -808,7 +820,7 @@ def MLTDv2(T_F, T_G, d, L_F, L_G, S):
         shared = sorted_intersection(r_F.label, r_G.label)
         if len(shared) == len(r_F.label) and len(shared) == len(r_G.label):
             #perfect match
-            #Issue with extension if one node is a single child and one is a branching node, may be optimal to extend multi-branch node into empty node and delete child label or instead it may be optimal to not extend and just delete non-branching node or let it be matched to one of the branching children (and delete remaining children) - note thi shappens in not just the case this comment is contained in
+            #Issue with extension if one node is a single child and one is a branching node, may be optimal to extend multi-branch node into empty node and delete child label or instead it may be optimal to not extend and just delete non-branching node or let it be matched to one of the branching children (and delete remaining children) - note this happens in not just the case this comment is contained in
             min_dist, min_S = MLTDv2(r_F.child, r_G.child, d, L_F, L_G, S.copy())
             return min_dist, min_S
         elif len(shared) == len(r_F.label):
@@ -895,6 +907,7 @@ def shell(root_F, root_G, L_F, L_G):
 
     #compute the symmetric difference of the label sets of the trees rooted at root_F and root_G
     diff_list = compute_differences(root_F, root_G)
+    #remove any labels that appear in exactly one of the two trees, and modify root_F and root_G
     pre_edits = remove_differences(root_F, root_G, diff_list)
     while i < len(k_values):
         global k
