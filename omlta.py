@@ -40,6 +40,8 @@ class Node():
     def __copy__(self):
         return Node(self.key, self.parent, self.child.copy(), self.label.copy())
 
+#Given a tree rooted at r and the key of a node to delete,
+#the procedure delete_node removes the node with name key
 def delete_node(r, key):
     nodes = deque([r])
     curr = nodes.pop()
@@ -47,49 +49,19 @@ def delete_node(r, key):
     while curr.key != key and nodes:
         curr = nodes.pop()
         nodes.extend(curr.child)
+    #find the node to remove    
     if curr.key == key:
+        #remove the node from the list of children in its parent
         curr.parent.child.remove(curr)
+        #for each child of the node to be removed change the parent to
+        #be the former grandparent
         for c in curr.child:
             c.parent = curr.parent
             curr.parent.child.append(c)
-   
-def delete_label(r, l, key):
-    #print(l, key)
-    nodes = deque([r])
-    curr = nodes.pop()
-    nodes.extend(curr.child)
-    while curr.key != key and nodes:
-        curr = nodes.pop()
-        nodes.extend(curr.child)
-    #print("Curr key ", curr.key, " with curr label ", curr.label)
-    if curr.key == key and l in curr.label:
-        curr.label.remove(l)
 
-def expand_node(r, key, l):
-    nodes = deque([r])
-    curr = nodes.pop()
-    nodes.extend(curr.child)
-    while curr.key != key and nodes:
-        curr = nodes.pop()
-        nodes.extend(curr.child)
-    if curr.key == key:
-        curr.expanded = curr.expanded + 1
-        new_node = Node(curr.key + '-' + str(curr.expanded))
-        if curr.parent != None:
-            curr.parent.child.remove(curr)
-            curr.parent.child.append(new_node)
-        new_node.child.append(curr)
-        new_node.parent = curr.parent
-        curr.parent = new_node
-        curr.label = remove_sorted(curr.label, l)
-        new_node.label = concat_sorted(new_node.label, l)
-
-    
-def print_tree(root: Node):
-    q = deque()
-    print(root)
-    
-
+#The size of a subtree is defined as the number of nodes in that subtree including the root
+#The procedure compute_sizes recursively fills in the size field for every node in the
+#tree rooted at root
 def compute_sizes(root: Node):
     if len(root.child) == 0:
         return 1
@@ -97,7 +69,9 @@ def compute_sizes(root: Node):
     for c in root.child:
         root.size += compute_sizes(c)
     return root.size
-    
+
+#The procedure sorted_intersection computes the intersection of two sorted lists l1 and l2
+#The list that is the intersection is returned
 def sorted_intersection(l1, l2):
     if not l1 or not l2:
         return []
@@ -166,32 +140,48 @@ def compute_labels(r):
             labels.append(l)
     return labels
 
+#The procedure compute_differences identifies the symmetric difference of the
+#label sets of two labeled rooted trees. r_F and r_G are the root nodes
+#The result is returned as a list in the local variable difference 
 def compute_differences(r_F, r_G):
     nodes = deque([r_F])
     #Find the difference in the label sets of F and G
+    #labels_F stores the labels in the tree whose root is r_F
     labels_F = []
     while nodes:
         curr = nodes.popleft()
         nodes.extend(curr.child)
         labels_F.extend(curr.label)
     nodes = deque([r_G])
+    #labels_G stores the labels in the tree whose root is r_G    
     labels_G = []
     while nodes:
         curr = nodes.popleft()
         nodes.extend(curr.child)
         labels_G.extend(curr.label)
+    #first compute the labels in labels_F but not in labels_G     
     difference = list(set(labels_F) - set(labels_G))
+    #nest, add to difference the labels in labels_F but not in labels_G         
     difference.extend(list(set(labels_G) - set(labels_F)))
     return difference
     
-
+#Given two rooted trees r_F and r_G and a symmetric difference, diff_list
+#of the labels in the two trees, the procedure remove_differences
+#modifies r_F and r_G to remove the unique labels
+#The return value is the sum of the number of labels removed from
+#the two trees
 def remove_differences(r_F, r_G, diff_list):
     removed_count = 0
+    #iterate over the nodes in the tree rooted at r_F
     nodes = deque([r_F])
     while nodes:
+        #curr is the current node
         curr = nodes.popleft()
         nodes.extend(curr.child)
         i = 0
+        #how the removal is done depends on whether the removed lable is or is not the
+        #last remaining label in the node curr
+        #if the last remaining label is removed then the node should be deleted
         for l in range(len(curr.label)):
             if curr.label[i] in diff_list and len(curr.label) > 1:
                 curr.label.remove(curr.label[i])
@@ -201,6 +191,7 @@ def remove_differences(r_F, r_G, diff_list):
                 delete_node(r_F, curr.key)
             else:
                 i = i + 1
+    #do the same removal algorithm for tree rooted at r_G
     nodes = deque([r_G])
     while nodes:
         curr = nodes.popleft()
@@ -217,7 +208,8 @@ def remove_differences(r_F, r_G, diff_list):
                 i = i + 1
     return removed_count
     
-#Given a node, finds the nearest branching descendant and returns path to it (inclusive)
+#Given a node v, finds the nearest branching descendant and returns path to it (inclusive)
+#and also returns the descendant
 def nearest_branching(v):
     path = [v]
     curr = v
@@ -891,11 +883,17 @@ def MLTDv2(T_F, T_G, d, L_F, L_G, S):
         else:
             min_dist, min_S = forest_helper(T_G, T_F, labeled, d, L_G, L_F, S.copy())
             return min_dist, min_S
-            
-def shell(root_F, root_G, L_F, L_G):  
+
+#shell is the high-level procedure to compute omltd
+#The two trees are represented by root_F and root_G
+def shell(root_F, root_G, L_F, L_G):
+    #The symbol k denotes the distance
+    #In this implementation, the upper-bound on the distance is doubled until the actual distance
+    #turns out to be less than or equal to the current upper bound
     k_values = [16, 32, 64, 128, 256, 512, 1024, 2048, 4096, 8192]
     i = 0
 
+    #compute the symmetric difference of the label sets of the trees rooted at root_F and root_G
     diff_list = compute_differences(root_F, root_G)
     pre_edits = remove_differences(root_F, root_G, diff_list)
     while i < len(k_values):
@@ -1087,5 +1085,6 @@ if __name__ == '__main__':
             l_copy = curr.label.copy()
             for l in l_copy:
                 L_G[l] = curr
-                
+
+    #call the upper-level procedure to compare the trees L_F and L_G            
     shell(root_F, root_G, L_F, L_G)
