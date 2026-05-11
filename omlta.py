@@ -909,11 +909,16 @@ def shell(root_F, root_G, L_F, L_G):
     diff_list = compute_differences(root_F, root_G)
     #remove any labels that appear in exactly one of the two trees, and modify root_F and root_G
     pre_edits = remove_differences(root_F, root_G, diff_list)
+
+    #set the candidate upper bound k as a global variable, so that it can be accessed in other
+    #procedures called directly or indirectly from shell
     while i < len(k_values):
         global k
         k = k_values[i]
         print("Checking k =  ", k)
+        #call MLTDv2, which does the next layer of the computation
         d, S = MLTDv2(root_F, root_G, 0, L_F, L_G, [])
+        #print results to the terminal
         print("Finished k = ", k)
         if d <= k:
             print("Minimum cost edit sequence: ")
@@ -943,12 +948,14 @@ def shell(root_F, root_G, L_F, L_G):
 
     #print(f"Set of ({len(l_deleted)}) labels deleted: ", ", ".join(l_deleted))
     return d
-    
+
+#code executation starts here
 if __name__ == '__main__':
 
     path = os.path.dirname(os.path.abspath(__file__))
     #path += "/"
     path += "\\"
+    #read the command-line arguments
     parser = argparse.ArgumentParser("Description: compute OMLTED between two trees stored in files")
     parser.add_argument('-pi', help="read trees in from pickle file", action='store_true')
     parser.add_argument('-o', help="output tree edits file", action='store_true')
@@ -956,14 +963,19 @@ if __name__ == '__main__':
     parser.add_argument("tree_file_2", help="the file name of the second file to read", type=str)
     args = parser.parse_args()
 
+    #print the available command-line arguments
     print(args)
 
+    #if trees are to be read in from a pickle file
     if args.pi:
         n = 1
         ltn = {}
         ntl = {}
         with open(path + args.tree_file_1, 'rb') as f:
             F = pickle.load(f)
+            #extract the nodes and edges from the entity F
+            #build up one node and edge at a time to get the
+            #internal representation of the rooted tree root_F
             V_F = list(F.nodes)
             E_F = list(F.edges)
             A_F = {}
@@ -980,12 +992,15 @@ if __name__ == '__main__':
                 A_F[e[0]].child.append(A_F[e[1]])
                 A_F[e[1]].parent = A_F[e[0]]
             r_F = []
+            #locate the root as the node that has None as its parent
             for v in V_F:
                 if A_F[v].parent is None:
                     r_F.append(A_F[v])
             root_F = r_F[0]
 
         with open(path + args.tree_file_2, 'rb') as f:
+            #extract the nodes and edges from the picle entity G
+            #to build up the rooted tree root_G
             G = pickle.load(f)
             V_G = list(G.nodes)
             E_G = list(G.edges)
@@ -1008,6 +1023,8 @@ if __name__ == '__main__':
                     r_G.append(A_G[v])
             root_G = r_G[0]
 
+        #build dictionaries L_F and L_G that
+        #map the labels in F and G respectively to their corresponding nodes
         nodes = deque([root_F])  
         L_F = {}
         while nodes:
@@ -1028,9 +1045,10 @@ if __name__ == '__main__':
                 L_G[str(ltn[l])] = curr
                 curr.label.remove(l)
                 curr.label = concat_sorted(curr.label, [str(ltn[l])])
-    else:
+    else:  #read the two trees from text files
         curr_f = open(args.tree_file_1, "r")
         Lines = curr_f.readlines()
+        #build up the set of nodes of the first tree F
         nodeset = {}
         for line in Lines:
             node_info = line.split()
@@ -1043,7 +1061,8 @@ if __name__ == '__main__':
                 else:
                     root_F = new_node
                     new_node.label.append('-1')
-                    
+
+        #set up the parent-child relationships in tree F                                
         for line in Lines:
             node_info = line.split()
             if node_info[0] != 'node_id' and node_info[0] != 'ROOT':
@@ -1054,7 +1073,9 @@ if __name__ == '__main__':
                 else:
                     curr.parent = nodeset[int(node_info[1])]
                     curr.parent.child.append(curr)
-                
+
+        #build a dictionary L_F that
+        #maps the labels in F to their corresponding nodes
         nodes = deque([root_F])  
         L_F = {}
 
@@ -1064,6 +1085,9 @@ if __name__ == '__main__':
             l_copy = curr.label.copy()
             for l in l_copy:
                 L_F[l] = curr
+
+        #repeat for the second tree G what was done for the first tree F
+        #the dictionary that maps labels in G to nodes is called L_G
         curr_f = open(args.tree_file_2, "r")
         nodeset = {}        
         Lines = curr_f.readlines()
@@ -1078,7 +1102,7 @@ if __name__ == '__main__':
                 else:
                     root_G = new_node
                     new_node.label.append('-1')
-                    
+        #set up the parent-child relationships in tree G            
         for line in Lines:
             node_info = line.split()
             if node_info[0] != 'node_id' and node_info[0] != 'ROOT':
