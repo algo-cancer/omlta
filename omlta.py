@@ -929,11 +929,20 @@ def shell(root_F, root_G, L_F, L_G):
             print("Normalized omltd: ", (d/(2*len(shared_labels))))
             break
         i = i + 1
-
-    if args.o:
-        f_edits_out = args.o 
-        with open(f_edits_out, 'wb') as handle:
-            pickle.dump((S, ntl), handle)
+        
+    #If the user specifies the optional output file, 
+    #write the edit sequence S to the provided output file location
+    if args.outputfile:
+        f_edits_out = args.outputfile
+        #If the user specifies the pickle file option, writes S
+        #as a pickle representation.
+        #Otherwise, writes S as a string.
+        if args.pi:
+            with open(f_edits_out, 'wb') as handle:
+                pickle.dump((S, ntl), handle)
+        else:
+            with open(f_edits_out, 'w') as handle:
+                handle.write(str(S))
 
     l_deleted = np.empty(int(d/2), dtype='U128')
     del_i = 0
@@ -958,7 +967,7 @@ if __name__ == '__main__':
     #read the command-line arguments
     parser = argparse.ArgumentParser("Description: compute OMLTED between two trees stored in files")
     parser.add_argument('-pi', help="read trees in from pickle file", action='store_true')
-    parser.add_argument('-o', help="output tree edits file", action='store_true')
+    parser.add_argument('-o', '--outputfile', action='store', help="output tree edits file")
     parser.add_argument("tree_file_1", help="the file name of the first file to read", type=str)
     parser.add_argument("tree_file_2", help="the file name of the second file to read", type=str)
     args = parser.parse_args()
