@@ -8,9 +8,9 @@ omlta.py requires two text files each specifying one of the two input trees. The
 
 The root node id should be ROOT with parent None.
 
-The labels should be comma-separated, no white space.  See [example-tree1.txt](https://github.com/algo-cancer/omlta/blob/main/example-tree1.txt) and [example-tree2.txt](https://github.com/algo-cancer/omlta/blob/main/example-tree2.txt) for an example.
+Labels do not need to be shared between the two trees. Each node except the root node in an input tree **must** have **at least one** label, and each label may appear in each input tree **at most once** per tree. Any labels unique to only one of the input tree files are removed by the omlta.py algorithm in a pre-processing step.
 
-Labels do not need to be shared between the two trees.  Any labels unique to only one of the input tree files are removed by the omlta.py algorithm in a pre-processing step.
+The labels should be comma-separated, no white space.  See [example-tree1.txt](https://github.com/algo-cancer/omlta/blob/main/example-tree1.txt) and [example-tree2.txt](https://github.com/algo-cancer/omlta/blob/main/example-tree2.txt) for an example.
 
 ## Installation
 This script is made in Python 3.  Installation should take no more than 5 minutes using the provided .yml to create the conda environment as follows:
