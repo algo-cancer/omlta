@@ -126,7 +126,7 @@ def concat_sorted(l, a):
 
 
 #post_order traverses the nodes of a tree and returns a list of the nodes
-# such that a parent node appears after its children
+# such that a parent node appears after its children, which is sometimes called postfix order
 def post_order(r):
     post = []
     q = deque([r])
@@ -232,12 +232,17 @@ def nearest_branching(v):
 #check_if_eq takes two arguments, which are rooted trees, r_F and r_G, and
 #it actually computes a distance in the two-dimensional list variable con_dist
 #and returns the value con_dist[r_F.key][r_G.key]
+#
 def check_if_eq(r_F, r_G):
     #print("Check if eq", file=f_wr)
+    #get lists of nodes in F and g in postfix order
     post_F = post_order(r_F)
     post_G = post_order(r_G)
+    #declare the two-dimenasional list con_dist one of whose entries will be returned
+    #con_dist is short for constraint distance
     con_dist = {}
     for u in post_F:
+        #declare the second dimension of con_dist for each value along the first dimension
         con_dist[u.key] = {}
         for v in post_G:   
             #If u or v are non-branching nodes, check if expansions lead to label matches
@@ -248,6 +253,7 @@ def check_if_eq(r_F, r_G):
                 i_G = 0
                 count_F = 0
                 count_G = 0
+                #find the net node in each subtree that has a non-empty label field
                 while i_F != len(nb_F) and i_G != len(nb_G):
                     while i_F != len(nb_F) and len(nb_F[i_F].label) == 0:
                         i_F = i_F + 1
@@ -255,6 +261,7 @@ def check_if_eq(r_F, r_G):
                         i_G = i_G + 1
                     if i_F == len(nb_F) or i_G == len(nb_G):
                         break
+                    #check whether all labels are shared between the node in F and the node in G
                     shared = sorted_intersection(nb_F[i_F].label, nb_G[i_G].label)
                     count_F = count_F + len(shared)
                     count_G = count_G + len(shared)
@@ -318,14 +325,16 @@ def check_if_eq(r_F, r_G):
 #L_F and L_G are just dictionaries where keys are labels and an entry is the node with that label
 #just used for a non-asymptotic speedup (could do a search through the tree instead for it)
 #Returns 0, 1, or 2 if the passed forests are equal, off by 1 label, or different beyond a single label
-#When 1 is returned, also returns the node with the label not shared between F and G as well as the label that is not shared 
+#When 1 is returned, also returns the node with the label not shared between F and G as well as the label that is not shared
+#L1 and L2 are dictionaries that map a label to the node that has that label
 def check_dist_two(roots_F, roots_G, L1, L2):
     # Create a virtual root if either F or G is a forest to make them trees (virtual roots have empty labels so trivially they will match)
     if not isinstance(roots_F, list):
         roots_F = [roots_F]
     if not isinstance(roots_G, list):
         roots_G = [roots_G]
-    
+
+    #this is a base case in which at least one of the trees is empty    
     if len(roots_F) == 0 or len(roots_G) == 0:
         if len(roots_F) == 0 and len(roots_G) == 0:
             return 0, None
@@ -356,9 +365,11 @@ def check_dist_two(roots_F, roots_G, L1, L2):
         curr = nodes.popleft()
         nodes.extend(curr.child)
         labels_G.extend(curr.label)
+    #first, compute the set of labels in F but not in G        
     difference = list(set(labels_F) - set(labels_G))
+    #second, add the set of labels in G but not in F
     difference.extend(list(set(labels_G) - set(labels_F)))
-    #If differences are at most 1, check for equality after removing the difference if it exists, otherwise return immediately
+    #If number of differences is at most 1, check for equality of the trees after removing the difference if it exists, otherwise return immediately
     if len(difference) == 1:
         if len(labels_F) > len(labels_G):
             diff_node = L1[difference[0]]
