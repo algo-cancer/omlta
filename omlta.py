@@ -253,7 +253,8 @@ def check_if_eq(r_F, r_G):
                 i_G = 0
                 count_F = 0
                 count_G = 0
-                #find the net node in each subtree that has a non-empty label field
+                #find the next node in each subtree that has a non-empty label field
+                #i_F is an index for tree F and i_G is an index for tree G
                 while i_F != len(nb_F) and i_G != len(nb_G):
                     while i_F != len(nb_F) and len(nb_F[i_F].label) == 0:
                         i_F = i_F + 1
@@ -273,7 +274,8 @@ def check_if_eq(r_F, r_G):
                     if len(nb_G[i_G].label) == count_G:
                         i_G = i_G + 1
                         count_G = 0
-                        
+
+                #skip over any additional nodes that have empty label sets        
                 while i_F != len(nb_F) and len(nb_F[i_F].label) == 0:
                         i_F = i_F + 1
                 while i_G != len(nb_G) and len(nb_G[i_G].label) == 0:
@@ -340,12 +342,14 @@ def check_dist_two(roots_F, roots_G, L1, L2):
             return 0, None
         else:
             return 2, None
-    
+
+    #in this case each of F and G is a forest with more than one tree    
     if len(roots_F) > 1 and len(roots_G) > 1:
         r_F = Node('-1')
         r_F.child = roots_F
         r_G = Node(-1)
         r_G.child = roots_G
+    #in this case one is a tree and the the other is a multi-tree forest, so they cann be equal        
     elif len(roots_F) > 1 or len(roots_G) > 1:
         return 2, None
     else:
@@ -392,9 +396,18 @@ def check_dist_two(roots_F, roots_G, L1, L2):
     else:
         return len(difference), None
 
-
+#The procedure forest_helper handles the parts of the MLTD computation in
+#which at least one fo the two entities being aligned, F_1 and F_2 is a
+#forest with more than one tree
+#target is a labelled node at highest level and is guaranteed to be in F_1
+#d is the current candidate distance
+#L_1 and L_2 are dictionaries that map the labels to nodes in F_1 and F_2
+#S is the current (likely partial) edit/alignment sequence
+#forest_helper is in a mutually recursive lopp with MLTDv2
 def forest_helper(F_1, F_2, target, d, L_1, L_2, S):
+    #start with the first label in the target node, which is in L_1
     l = target.label[0]
+    #test whether the label is also in L_2
     if l in L_2:
         match = L_2[l]
         shared = sorted_intersection(target.label, match.label)
@@ -435,7 +448,7 @@ def forest_helper(F_1, F_2, target, d, L_1, L_2, S):
                 #if temp_dist < min_dist:
                 #    min_dist = temp_dist
                 #    min_S = temp_S
-        else:
+        else:  #len(target.label) > 0 and we need to call recursively 
             min_dist, min_S = MLTDv2(F_1, F_2, d + 1, L_1, L_2, S.copy())
         target.label = concat_sorted(target.label, [l])
         S.pop()
@@ -576,7 +589,7 @@ def forest_helper(F_1, F_2, target, d, L_1, L_2, S):
                 return min_dist, min_S        
             else:
                 #Only target is a root, match is in a root's subtree of F_2
-                #In this case, find highest unlabeled node and try top delete all nodes in path to root above it to match the "target" and "match" nodes together
+                #In this case, find highest unlabeled node and try to delete all nodes in path to root above it to match the "target" and "match" nodes together
                 highest_empty_node = match
                 curr = match.parent
                 while curr != r_2.parent:
@@ -668,7 +681,7 @@ def forest_helper(F_1, F_2, target, d, L_1, L_2, S):
                         prev = deleted
                         deleted = deleted.parent
                     F_2.remove(r_2)
-                    #If highest empty labelled node is not a root, then we've deleted nodes on the path to the root and we should match "target" and "match" nodes together, delete the shared labels from "target", or delete "target"
+                    #If highest empty labeled node is not a root, then we've deleted nodes on the path to the root and we should match "target" and "match" nodes together, delete the shared labels from "target", or delete "target"
                     F_1.remove(target)
                     temp_dist, temp_S = MLTDv2(target, highest_empty_node, d + label_count, L_1, L_2, S.copy())
                     min_dist, min_S = MLTDv2(F_1, F_2, temp_dist, L_1, L_2, temp_S)
@@ -790,17 +803,27 @@ def forest_helper(F_1, F_2, target, d, L_1, L_2, S):
                         min_dist = temp_dist
                         min_S = temp_S    
             return min_dist, min_S
-                
+
+#this is the key procedure to compute the distance and the alignmenet both of which are returned.
+#T_F and T)G are the two trees
+#d is a lower bound on the distance; the global variable k is the candidate upper bound
+#L_F and L_G are dictionaries that map labels to nodes that have those labels
+#S is a partially built alignment (edit) sequence as a list;
+#eventually the correct d and the full S will be returned as a pair
+#The procedure MLTDv2 is recursive
 def MLTDv2(T_F, T_G, d, L_F, L_G, S):
     if not isinstance(T_F, list):
         T_F = [T_F]
     if not isinstance(T_G, list):
         T_G = [T_G]
+    #One invariant is that the candidate distance value d must be <= the current global upper bound k    
     if d > k:
         return k + 1000, S
 
     #print(len(T_F), len(T_G))
 
+    #if F is empty, then the rest of the alignment is achieved by deleting every label in G
+    #the distance returned is incremented by the number of labels in G
     if len(T_F) == 0:
         dist = d
         for r in T_G:
@@ -812,6 +835,8 @@ def MLTDv2(T_F, T_G, d, L_F, L_G, S):
             return k + 1000, S
         else:
             return dist, S
+        
+    #This is the symmetric case in which G is empty    
     elif len(T_G) == 0:
         dist = d
         for r in T_F:
@@ -829,11 +854,13 @@ def MLTDv2(T_F, T_G, d, L_F, L_G, S):
         r_F = T_F[0]
         r_G = T_G[0]
         shared = sorted_intersection(r_F.label, r_G.label)
+        #In this case all labels are shared between the two tree roots
         if len(shared) == len(r_F.label) and len(shared) == len(r_G.label):
             #perfect match
             #Issue with extension if one node is a single child and one is a branching node, may be optimal to extend multi-branch node into empty node and delete child label or instead it may be optimal to not extend and just delete non-branching node or let it be matched to one of the branching children (and delete remaining children) - note this happens in not just the case this comment is contained in
             min_dist, min_S = MLTDv2(r_F.child, r_G.child, d, L_F, L_G, S.copy())
             return min_dist, min_S
+        #In this case, every label in the root of F is also in the root of G but the root of G has at least one extra label and that has to be removed
         elif len(shared) == len(r_F.label):
             r_G.label = remove_sorted(r_G.label, shared)
             S.append(('ne', r_G.key, shared))
@@ -841,6 +868,7 @@ def MLTDv2(T_F, T_G, d, L_F, L_G, S):
             S.pop()
             r_G.label = concat_sorted(r_G.label, shared)
             return min_dist, min_S
+        #In this case, every label in the root of G is also in the root of F but the root of F has at least one extra label and that has to be removed        
         elif len(shared) == len(r_G.label):
             r_F.label = remove_sorted(r_F.label, shared)
             S.append(('ne', r_F.key, shared))
@@ -848,6 +876,7 @@ def MLTDv2(T_F, T_G, d, L_F, L_G, S):
             S.pop()
             r_F.label = concat_sorted(r_F.label, shared)
             return min_dist, min_S
+        #In this 'else' case, each tree root has at least one label that the other tree root does not have 
         else:
             #delete either root
             if len(shared) > 0:
@@ -857,14 +886,17 @@ def MLTDv2(T_F, T_G, d, L_F, L_G, S):
                 r_G.label = remove_sorted(r_G.label, shared)
                 S.append(('ne', r_G.key, shared))                
 
+            #remove extra label(s) from F and call recursively with the same G and a smaller F    
             S.append(('nd', r_F.key, r_F.label))
             min_dist, min_S = MLTDv2(r_F.child, [r_G], d + len(r_F.label), L_F, L_G, S.copy())
             S.pop()
             #r_G.label = concat_sorted(r_G.label, shared)
             #r_F.label = remove_sorted(r_F.label, shared)
             S.append(('nd', r_G.key, r_G.label))
+            #remove extra label(s) from G and call recursively with the same F and a smaller G                
             temp_dist, temp_S = MLTDv2([r_F], r_G.child, d + len(r_G.label), L_F, L_G, S.copy())
 
+            #compare the two alternatives of smaller F and smaller G and select the one with lesser distance
             if temp_dist < min_dist:
                 min_dist = temp_dist
                 min_S = temp_S
@@ -880,7 +912,8 @@ def MLTDv2(T_F, T_G, d, L_F, L_G, S):
                 S.pop()
 
             return min_dist, min_S
-        
+
+    #The else clause below handles the situation in which at least one of F and G is a forest with more than one tree    
     else:
         # Find the labelled node at the highest level in remaining trees
         nodes = deque(T_F + T_G)
@@ -900,6 +933,7 @@ def MLTDv2(T_F, T_G, d, L_F, L_G, S):
         r = labeled
         while r not in T_F and r not in T_G:
             r = r.parent
+        #The order of parameters to forest_helper depends on which tree in either forest contains the labelled node at highest level     
         if r in T_F:
             min_dist, min_S = forest_helper(T_F, T_G, labeled, d, L_F, L_G, S.copy())
             return min_dist, min_S
@@ -928,6 +962,7 @@ def shell(root_F, root_G, L_F, L_G):
         k = k_values[i]
         print("Checking k =  ", k)
         #call MLTDv2, which does the next layer of the computation
+        #start the first attempt with the candidate distance as 0 (third argument) and the initial alignment/edit list as empty (sixth argument)
         d, S = MLTDv2(root_F, root_G, 0, L_F, L_G, [])
         #print results to the terminal
         print("Finished k = ", k)
