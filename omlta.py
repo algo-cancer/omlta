@@ -110,7 +110,7 @@ def remove_sorted(l, r):
     return new_l      
 
 #concat_sorted takes two sorted lists l and a and returns a sorted lists that combines them
-#if an element appears one time each in both l and and a, it will apear twice in the returned list
+#if an element appears one time each in both l and and a, it will appear twice in the returned list
 def concat_sorted(l, a):
     i = 0
     j = 0
@@ -154,7 +154,6 @@ def compute_labels(r):
 #The result is returned as a list in the local variable difference 
 def compute_differences(r_F, r_G):
     nodes = deque([r_F])
-    #Find the difference in the label sets of F and G
     #labels_F stores the labels in the tree whose root is r_F
     labels_F = []
     while nodes:
@@ -170,7 +169,7 @@ def compute_differences(r_F, r_G):
         labels_G.extend(curr.label)
     #first compute the labels in labels_F but not in labels_G     
     difference = list(set(labels_F) - set(labels_G))
-    #nest, add to difference the labels in labels_F but not in labels_G         
+    #add to difference the labels in labels_G but not in labels_F         
     difference.extend(list(set(labels_G) - set(labels_F)))
     return difference
     
