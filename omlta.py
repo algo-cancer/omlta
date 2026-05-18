@@ -1053,7 +1053,7 @@ if __name__ == '__main__':
             root_F = r_F[0]
 
         with open(path + args.tree_file_2, 'rb') as f:
-            #extract the nodes and edges from the picle entity G
+            #extract the nodes and edges from the pickle entity G
             #to build up the rooted tree root_G
             G = pickle.load(f)
             V_G = list(G.nodes)
