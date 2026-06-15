@@ -1,0 +1,2 @@
+nd	4	mut152,mut2,mut247,mut345,mut374,mut396,mut431,mut433,mut437,mut460,mut494,mut499,mut60,mut82,mut83	F
+nd	4	mut152,mut2,mut247,mut345,mut374,mut396,mut431,mut433,mut437,mut460,mut494,mut499,mut60,mut82,mut83	G

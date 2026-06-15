@@ -1,0 +1,11 @@
+ld	9	mut139	F
+ld	9	mut171	F
+ld	9	mut378	F
+ld	9	mut444	F
+ld	9	mut516	F
+ld	9	mut608	F
+ld	9	mut61	F
+nd	9		F
+nd	4	mut228,mut305,mut342,mut534,mut580,mut671,mut698,mut703	F
+nd	4	mut228,mut305,mut342,mut534,mut580,mut671,mut698,mut703	G
+nd	9	mut139,mut171,mut378,mut444,mut516,mut608,mut61	G

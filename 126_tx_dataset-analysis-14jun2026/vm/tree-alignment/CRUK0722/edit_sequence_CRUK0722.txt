@@ -1,0 +1,23 @@
+ld	8	mut142	F
+ld	8	mut282	F
+ld	8	mut451	F
+ld	8	mut637	F
+ld	8	mut662	F
+ld	8	mut836	F
+ld	8	mut996	F
+nd	8		F
+ld	7	mut162	F
+ld	7	mut183	F
+ld	7	mut288	F
+ld	7	mut326	F
+ld	7	mut411	F
+ld	7	mut629	F
+ld	7	mut765	F
+ld	7	mut969	F
+nd	7		F
+nd	4	mut130,mut131,mut150,mut191,mut256,mut286,mut367,mut417,mut497,mut511,mut544,mut641,mut672,mut804,mut950,mut960,mut971	F
+nd	11	mut27,mut318,mut533,mut67,mut877	F
+nd	11	mut27,mut318,mut533,mut67,mut877	G
+nd	4	mut130,mut131,mut150,mut191,mut256,mut286,mut367,mut417,mut497,mut511,mut544,mut641,mut672,mut804,mut950,mut960,mut971	G
+nd	7	mut162,mut183,mut288,mut326,mut411,mut629,mut765,mut969	G
+nd	8	mut142,mut282,mut451,mut637,mut662,mut836,mut996	G

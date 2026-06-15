@@ -1,0 +1,15 @@
+ld	4	mut118	F
+ld	4	mut35	F
+ld	4	mut36	F
+ld	4	mut62	F
+ld	4	mut76	F
+ld	4	mut78	F
+nd	4		F
+ld	6	mut100	F
+ld	6	mut25	F
+ld	6	mut28	F
+ld	6	mut59	F
+ld	6	mut80	F
+nd	6		F
+nd	4	mut118,mut35,mut36,mut62,mut76,mut78	G
+nd	6	mut100,mut25,mut28,mut59,mut80	G

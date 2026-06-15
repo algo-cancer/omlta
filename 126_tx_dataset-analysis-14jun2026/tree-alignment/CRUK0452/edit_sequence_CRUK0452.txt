@@ -1,0 +1,2 @@
+nd	5	mut149,mut23,mut265,mut276,mut307,mut317,mut394,mut404	F
+nd	5	mut149,mut23,mut265,mut276,mut307,mut317,mut394,mut404	G

@@ -1,0 +1,20 @@
+ld	9	mut341	F
+ld	9	mut371	F
+ld	9	mut537	F
+ld	9	mut617	F
+ld	9	mut728	F
+ld	9	mut740	F
+nd	9		F
+ld	10	mut226	F
+ld	10	mut398	F
+ld	10	mut454	F
+ld	10	mut602	F
+ld	10	mut62	F
+ld	10	mut689	F
+nd	10		F
+nd	8	mut179,mut351,mut515,mut565,mut650,mut757,mut807	F
+nd	12	mut211,mut42,mut572,mut574,mut85	F
+nd	8	mut179,mut351,mut515,mut565,mut650,mut757,mut807	G
+nd	12	mut211,mut42,mut572,mut574,mut85	G
+nd	9	mut341,mut371,mut537,mut617,mut728,mut740	G
+nd	10	mut226,mut398,mut454,mut602,mut62,mut689	G

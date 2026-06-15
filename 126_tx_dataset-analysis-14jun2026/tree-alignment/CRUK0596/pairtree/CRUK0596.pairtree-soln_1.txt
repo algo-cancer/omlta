@@ -1,0 +1,23 @@
+node_id	parent_id	mutations
+ROOT	ROOT	
+1	ROOT	mut4,mut5,mut7,mut8,mut10,mut11,mut13,mut14,mut16,mut17,mut19,mut21,mut22,mut23,mut26,mut27,mut29,mut30,mut31,mut32,mut33,mut34,mut35,mut38,mut39,mut40,mut42,mut43,mut44,mut46,mut47,mut48,mut52,mut54,mut56,mut64,mut65,mut66,mut67,mut69,mut70,mut72,mut73,mut75,mut77,mut79,mut81,mut82,mut83,mut84,mut85,mut86,mut87,mut88,mut89,mut90,mut92,mut93,mut95,mut96,mut98,mut99,mut100,mut101,mut102,mut105,mut109,mut115,mut117,mut126,mut127,mut129,mut130,mut132,mut134,mut138,mut142,mut144,mut146,mut147,mut149,mut150,mut151,mut152,mut153,mut154,mut155,mut156,mut158,mut160,mut161,mut164,mut165,mut166,mut170,mut175,mut176,mut177,mut183,mut185,mut188,mut189,mut190,mut191,mut192,mut196,mut197,mut198,mut199,mut200,mut201,mut202,mut203,mut205,mut206,mut207,mut208,mut211,mut213,mut214,mut215,mut216,mut218,mut219,mut223,mut224,mut226,mut227,mut230,mut231,mut232,mut233,mut234,mut237,mut238,mut240,mut241,mut244,mut245,mut246,mut251,mut252,mut253,mut254,mut255,mut256,mut258,mut259,mut260,mut264,mut265,mut266,mut267,mut268,mut270,mut272,mut273,mut274,mut275,mut277,mut281,mut282,mut283,mut284,mut286,mut287,mut288,mut290,mut293,mut294,mut295,mut296,mut298,mut300,mut303,mut304,mut305,mut306,mut307,mut308,mut309,mut310,mut312,mut313,mut314,mut315,mut316,mut317,mut320,mut321,mut322,mut323,mut325,mut330,mut342,mut346,mut347,mut348,mut351,mut352,mut353,mut354,mut355,mut357,mut359,mut360,mut363,mut367,mut368,mut369,mut370,mut372,mut373,mut375,mut376,mut377,mut378,mut379,mut383,mut385,mut387,mut388,mut391,mut393,mut395,mut398,mut403,mut404,mut409,mut412,mut414,mut415,mut417,mut419,mut420,mut425,mut426,mut430,mut431,mut432,mut434,mut439,mut440,mut441,mut442,mut443
+2	1	mut0,mut50,mut60,mut68,mut107,mut110,mut114,mut119,mut120,mut136,mut139,mut143,mut145,mut178,mut194,mut222,mut225,mut235,mut239,mut249,mut278,mut292,mut318,mut324,mut328,mut329,mut331,mut332,mut333,mut334,mut335,mut336,mut337,mut338,mut339,mut345,mut374,mut382,mut389,mut394,mut410,mut418
+4	2	mut45,mut71,mut108,mut112,mut121,mut124,mut159,mut182,mut212,mut285,mut401,mut427
+5	1	mut53,mut103,mut125,mut257,mut269,mut271,mut350,mut356,mut362,mut396,mut438
+6	1	mut20,mut49,mut55,mut111,mut113,mut180,mut248,mut319,mut340,mut429,mut437
+7	2	mut63,mut80,mut162,mut172,mut186,mut220,mut406,mut422,mut428,mut436
+8	2	mut104,mut116,mut131,mut157,mut195,mut221,mut236,mut361,mut380,mut435
+10	1	mut9,mut59,mut179,mut209,mut302,mut365,mut392,mut423,mut424
+11	1	mut18,mut25,mut37,mut57,mut106,mut276,mut291,mut327,mut421
+12	1	mut128,mut174,mut184,mut242,mut263,mut326,mut390,mut397,mut407
+13	1	mut58,mut97,mut135,mut169,mut210,mut250,mut381,mut399
+15	1	mut6,mut94,mut123,mut133,mut204,mut261,mut341
+18	4	mut41,mut122,mut193,mut358,mut364,mut366,mut416
+19	2	mut1,mut62,mut148,mut228,mut371,mut408
+20	ROOT	mut24,mut247,mut279,mut343,mut344,mut433
+23	1	mut36,mut141,mut217,mut384,mut413
+24	2	mut51,mut76,mut289,mut405,mut411
+17	24	mut15,mut168,mut171,mut173,mut262,mut349,mut400
+9	17	mut2,mut3,mut28,mut74,mut118,mut187,mut299,mut301,mut386
+16	24	mut12,mut163,mut181,mut280,mut297,mut311,mut402
+14	24	mut61,mut78,mut91,mut137,mut140,mut167,mut229,mut243

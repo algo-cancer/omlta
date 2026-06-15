@@ -1,0 +1,11 @@
+ld	6	mut104	F
+ld	6	mut109	F
+ld	6	mut137	F
+ld	6	mut16	F
+ld	6	mut266	F
+ld	6	mut54	F
+ld	6	mut86	F
+ld	6	mut87	F
+ld	6	mut90	F
+nd	6		F
+nd	6	mut104,mut109,mut137,mut16,mut266,mut54,mut86,mut87,mut90	G

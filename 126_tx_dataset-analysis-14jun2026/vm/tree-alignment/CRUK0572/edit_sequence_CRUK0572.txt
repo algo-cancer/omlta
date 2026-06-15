@@ -1,0 +1,34 @@
+ld	5	mut102	F
+ld	5	mut133	F
+ld	5	mut190	F
+ld	5	mut197	F
+ld	5	mut209	F
+ld	5	mut227	F
+ld	5	mut238	F
+ld	5	mut256	F
+ld	5	mut287	F
+ld	5	mut37	F
+ld	5	mut70	F
+ld	5	mut80	F
+nd	5		F
+ld	7	mut108	F
+ld	7	mut108	G
+ld	7	mut119	F
+ld	7	mut119	G
+ld	7	mut121	F
+ld	7	mut121	G
+ld	7	mut145	F
+ld	7	mut145	G
+ld	7	mut198	F
+ld	7	mut198	G
+ld	7	mut261	F
+ld	7	mut261	G
+ld	7	mut31	F
+ld	7	mut31	G
+ld	7	mut33	F
+ld	7	mut33	G
+ld	7	mut61	F
+ld	7	mut61	G
+nd	7		F
+nd	7		G
+nd	5	mut102,mut133,mut190,mut197,mut209,mut227,mut238,mut256,mut287,mut37,mut70,mut80	G

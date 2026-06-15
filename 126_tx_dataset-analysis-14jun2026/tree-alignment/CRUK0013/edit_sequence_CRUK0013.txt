@@ -1,0 +1,2 @@
+nd	5	mut134,mut156,mut159,mut193,mut31,mut45,mut6,mut60,mut85,mut89,mut90,mut92	F
+nd	5	mut134,mut156,mut159,mut193,mut31,mut45,mut6,mut60,mut85,mut89,mut90,mut92	G

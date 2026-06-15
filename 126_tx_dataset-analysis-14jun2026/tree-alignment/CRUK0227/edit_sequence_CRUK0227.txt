@@ -1,0 +1,4 @@
+nd	5	mut118,mut165,mut177,mut206,mut218,mut238,mut256,mut301,mut307,mut32,mut47,mut476,mut486,mut501,mut515,mut544,mut579,mut585,mut588,mut597,mut9	F
+nd	7	mut159,mut186,mut2,mut24,mut303,mut371,mut376,mut478,mut505,mut517,mut557,mut599,mut635,mut69	F
+nd	7	mut159,mut186,mut2,mut24,mut303,mut371,mut376,mut478,mut505,mut517,mut557,mut599,mut635,mut69	G
+nd	5	mut118,mut165,mut177,mut206,mut218,mut238,mut256,mut301,mut307,mut32,mut47,mut476,mut486,mut501,mut515,mut544,mut579,mut585,mut588,mut597,mut9	G

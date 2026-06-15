@@ -1,0 +1,4 @@
+nd	7	mut10,mut210,mut264,mut283,mut309,mut425,mut69	F
+nd	6	mut16,mut167,mut173,mut191,mut217,mut229,mut233,mut263,mut294,mut297,mut362,mut366,mut41,mut426,mut430,mut443,mut456,mut477,mut8	F
+nd	6	mut16,mut167,mut173,mut191,mut217,mut229,mut233,mut263,mut294,mut297,mut362,mut366,mut41,mut426,mut430,mut443,mut456,mut477,mut8	G
+nd	7	mut10,mut210,mut264,mut283,mut309,mut425,mut69	G

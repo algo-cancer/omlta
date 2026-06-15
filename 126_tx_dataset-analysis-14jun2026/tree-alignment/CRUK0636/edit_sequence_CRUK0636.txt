@@ -1,0 +1,4 @@
+nd	7	mut304,mut478,mut508,mut573,mut658,mut68,mut96	F
+nd	8	mut168,mut201,mut621,mut639,mut662	F
+nd	8	mut168,mut201,mut621,mut639,mut662	G
+nd	7	mut304,mut478,mut508,mut573,mut658,mut68,mut96	G

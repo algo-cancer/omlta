@@ -1,0 +1,4 @@
+nd	14	mut629,mut642,mut691,mut906,mut911	F
+nd	9	mut131,mut150,mut193,mut231,mut284,mut356,mut507,mut519,mut528,mut641,mut794,mut866	F
+nd	9	mut131,mut150,mut193,mut231,mut284,mut356,mut507,mut519,mut528,mut641,mut794,mut866	G
+nd	14	mut629,mut642,mut691,mut906,mut911	G

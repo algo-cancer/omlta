@@ -1,0 +1,2 @@
+nd	7	mut292,mut294,mut640,mut752,mut793,mut809	F
+nd	7	mut292,mut294,mut640,mut752,mut793,mut809	G

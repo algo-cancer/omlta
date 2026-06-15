@@ -1,0 +1,6 @@
+node_id	parent_id	labels
+3	ROOT	mut0,mut8,mut10,mut11,mut14,mut18,mut29,mut35,mut37,mut38,mut40,mut47,mut48,mut49,mut53,mut58,mut63,mut64,mut66,mut70,mut77,mut78,mut79,mut81,mut82,mut83,mut95,mut101,mut102,mut105,mut106,mut109,mut110,mut111,mut116,mut118,mut125,mut127,mut145,mut149,mut150,mut151,mut155,mut157,mut164,mut167,mut169,mut177,mut182,mut185,mut196,mut197,mut201,mut202,mut206,mut210,mut224,mut230,mut234,mut238,mut244,mut247,mut253,mut254,mut257,mut261,mut264,mut272,mut278,mut281,mut284,mut289,mut292,mut293,mut302,mut307,mut310,mut314,mut318,mut319,mut322,mut325,mut326,mut328,mut335,mut338,mut346,mut347,mut348,mut350,mut353,mut355,mut356,mut358,mut364,mut365,mut367,mut370,mut374,mut375,mut379,mut380,mut383
+2	3	mut3,mut5,mut20,mut28,mut33,mut36,mut60,mut68,mut74,mut86,mut97,mut107,mut108,mut112,mut123,mut128,mut138,mut142,mut143,mut165,mut170,mut176,mut179,mut183,mut190,mut191,mut193,mut194,mut195,mut208,mut212,mut222,mut223,mut226,mut228,mut237,mut246,mut256,mut259,mut262,mut268,mut269,mut273,mut275,mut288,mut295,mut298,mut299,mut301,mut306,mut309,mut316,mut317,mut327,mut332,mut361,mut362,mut366,mut368,mut369,mut372,mut378,mut381,mut384
+11	3	mut12,mut96,mut134,mut200,mut221,mut233,mut263,mut297,mut312,mut321,mut330,mut334,mut382
+13	3	mut50,mut133,mut204,mut213,mut214,mut215,mut242,mut251,mut371
+14	3	mut52,mut98,mut122,mut126,mut209,mut311,mut351

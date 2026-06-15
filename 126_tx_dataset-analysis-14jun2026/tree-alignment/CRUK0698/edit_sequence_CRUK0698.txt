@@ -1,0 +1,8 @@
+ld	10	mut206	F
+ld	10	mut235	F
+ld	10	mut44	F
+ld	10	mut484	F
+ld	10	mut652	F
+ld	10	mut705	F
+nd	10		F
+nd	10	mut206,mut235,mut44,mut484,mut652,mut705	G

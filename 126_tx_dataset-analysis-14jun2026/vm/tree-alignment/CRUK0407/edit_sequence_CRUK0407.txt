@@ -1,0 +1,113 @@
+ld	14	mut11	F
+ld	14	mut11	G
+ld	14	mut150	F
+ld	14	mut150	G
+ld	14	mut205	F
+ld	14	mut205	G
+ld	14	mut212	F
+ld	14	mut212	G
+ld	14	mut23	F
+ld	14	mut23	G
+ld	14	mut42	F
+ld	14	mut42	G
+ld	14	mut91	F
+ld	14	mut91	G
+nd	14		F
+nd	14		G
+ld	4	mut132	F
+ld	4	mut132	G
+ld	4	mut14	F
+ld	4	mut14	G
+ld	4	mut141	F
+ld	4	mut141	G
+ld	4	mut148	F
+ld	4	mut148	G
+ld	4	mut149	F
+ld	4	mut149	G
+ld	4	mut156	F
+ld	4	mut156	G
+ld	4	mut16	F
+ld	4	mut16	G
+ld	4	mut178	F
+ld	4	mut178	G
+ld	4	mut183	F
+ld	4	mut183	G
+ld	4	mut192	F
+ld	4	mut192	G
+ld	4	mut194	F
+ld	4	mut194	G
+ld	4	mut206	F
+ld	4	mut206	G
+ld	4	mut207	F
+ld	4	mut207	G
+ld	4	mut41	F
+ld	4	mut41	G
+ld	4	mut8	F
+ld	4	mut8	G
+nd	4		F
+nd	4		G
+ld	16	mut104	F
+ld	16	mut104	G
+ld	16	mut131	F
+ld	16	mut131	G
+ld	16	mut3	F
+ld	16	mut3	G
+ld	16	mut32	F
+ld	16	mut32	G
+ld	16	mut43	F
+ld	16	mut43	G
+ld	16	mut61	F
+ld	16	mut61	G
+nd	16		F
+nd	16		G
+ld	9	mut115	F
+ld	9	mut13	F
+ld	9	mut140	F
+ld	9	mut154	F
+ld	9	mut170	F
+ld	9	mut221	F
+ld	9	mut60	F
+ld	9	mut85	F
+nd	9		F
+ld	13	mut0	F
+ld	13	mut169	F
+ld	13	mut191	F
+ld	13	mut203	F
+ld	13	mut35	F
+ld	13	mut39	F
+ld	13	mut95	F
+nd	13		F
+ld	18	mut137	F
+ld	18	mut137	G
+ld	18	mut27	F
+ld	18	mut27	G
+ld	18	mut54	F
+ld	18	mut54	G
+ld	18	mut87	F
+ld	18	mut87	G
+ld	18	mut90	F
+ld	18	mut90	G
+nd	18		F
+nd	18		G
+ld	7	mut130	F
+ld	7	mut130	G
+ld	7	mut146	F
+ld	7	mut146	G
+ld	7	mut186	F
+ld	7	mut186	G
+ld	7	mut4	F
+ld	7	mut4	G
+ld	7	mut40	F
+ld	7	mut40	G
+ld	7	mut48	F
+ld	7	mut48	G
+ld	7	mut51	F
+ld	7	mut51	G
+ld	7	mut72	F
+ld	7	mut72	G
+ld	7	mut96	F
+ld	7	mut96	G
+nd	7		F
+nd	7		G
+nd	9	mut115,mut13,mut140,mut154,mut170,mut221,mut60,mut85	G
+nd	13	mut0,mut169,mut191,mut203,mut35,mut39,mut95	G

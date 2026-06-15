@@ -1,0 +1,6 @@
+nd	6	mut1,mut10,mut137,mut169,mut280,mut392,mut398	F
+nd	5	mut109,mut112,mut113,mut226,mut296,mut384,mut40,mut71,mut74	F
+nd	3	mut103,mut11,mut161,mut165,mut189,mut224,mut241,mut245,mut248,mut249,mut294,mut302,mut308,mut338,mut366,mut376,mut377,mut389,mut391,mut401,mut439,mut488,mut62	F
+nd	3	mut103,mut11,mut161,mut165,mut189,mut224,mut241,mut245,mut248,mut249,mut294,mut302,mut308,mut338,mut366,mut376,mut377,mut389,mut391,mut401,mut439,mut488,mut62	G
+nd	5	mut109,mut112,mut113,mut226,mut296,mut384,mut40,mut71,mut74	G
+nd	6	mut1,mut10,mut137,mut169,mut280,mut392,mut398	G

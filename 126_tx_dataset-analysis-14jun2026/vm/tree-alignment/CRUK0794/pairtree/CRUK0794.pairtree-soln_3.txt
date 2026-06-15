@@ -1,0 +1,21 @@
+node_id	parent_id	mutations
+ROOT	ROOT	
+1	ROOT	mut11,mut16,mut20,mut26,mut33,mut34,mut35,mut39,mut44,mut55,mut56,mut57,mut63,mut70,mut76,mut77,mut79,mut91,mut92,mut98,mut101,mut103,mut105,mut119,mut133,mut140,mut153,mut155,mut157,mut167,mut171,mut173,mut174,mut179,mut184,mut186,mut189,mut191,mut193,mut196,mut204,mut205,mut216,mut217,mut228,mut231,mut234,mut247,mut249,mut250,mut259,mut261,mut271,mut272,mut275,mut279
+2	ROOT	mut0,mut6,mut8,mut9,mut14,mut29,mut49,mut52,mut58,mut62,mut64,mut69,mut84,mut110,mut115,mut120,mut132,mut141,mut159,mut163,mut177,mut181,mut182,mut185,mut203,mut218,mut219,mut226,mut235,mut254,mut258,mut265
+5	2	mut23,mut53,mut89,mut108,mut117,mut118,mut122,mut125,mut134,mut137,mut142,mut143,mut147,mut154,mut165,mut172,mut202,mut232,mut236,mut241,mut281
+6	2	mut2,mut22,mut30,mut40,mut43,mut46,mut50,mut87,mut95,mut126,mut127,mut138,mut169,mut223,mut233,mut240,mut267,mut280
+8	ROOT	mut65,mut113,mut131,mut136,mut149,mut151,mut166,mut207,mut208,mut220,mut255,mut260,mut264,mut278
+9	ROOT	mut31,mut36,mut51,mut59,mut60,mut90,mut128,mut187,mut214,mut245,mut246,mut270
+10	2	mut10,mut27,mut32,mut48,mut72,mut82,mut99,mut161,mut190,mut209,mut210,mut248
+3	10	mut12,mut13,mut24,mut28,mut41,mut42,mut45,mut74,mut93,mut96,mut102,mut106,mut144,mut150,mut152,mut162,mut175,mut178,mut188,mut206,mut230,mut239,mut243,mut276,mut283
+12	2	mut1,mut61,mut68,mut75,mut124,mut145,mut192,mut225,mut269
+13	ROOT	mut19,mut156,mut198,mut199,mut211,mut212,mut221,mut274
+14	2	mut66,mut78,mut97,mut116,mut164,mut180,mut229,mut244
+15	2	mut4,mut17,mut47,mut129,mut130,mut201,mut282
+17	2	mut21,mut135,mut148,mut158,mut176,mut222
+11	17	mut38,mut73,mut81,mut83,mut100,mut109,mut160,mut197,mut224,mut253,mut257
+16	11	mut67,mut94,mut112,mut139,mut146,mut215,mut268
+18	2	mut85,mut86,mut123,mut170,mut183,mut195
+4	18	mut3,mut5,mut7,mut18,mut25,mut37,mut71,mut80,mut88,mut104,mut114,mut121,mut194,mut213,mut237,mut238,mut242,mut256,mut262,mut266,mut273,mut277
+19	6	mut15,mut107,mut168,mut200,mut227
+20	17	mut54,mut111,mut251,mut252,mut263

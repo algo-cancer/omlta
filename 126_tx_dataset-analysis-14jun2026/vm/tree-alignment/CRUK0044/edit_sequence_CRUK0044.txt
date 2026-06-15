@@ -1,0 +1,4 @@
+nd	5	mut133,mut20,mut26,mut269,mut284,mut303,mut320,mut374,mut385,mut452,mut472,mut67,mut73,mut83	F
+nd	4	mut147,mut15,mut164,mut190,mut245,mut305,mut329,mut33,mut353,mut370,mut42,mut444,mut47,mut64,mut66,mut76	F
+nd	5	mut133,mut20,mut26,mut269,mut284,mut303,mut320,mut374,mut385,mut452,mut472,mut67,mut73,mut83	G
+nd	4	mut147,mut15,mut164,mut190,mut245,mut305,mut329,mut33,mut353,mut370,mut42,mut444,mut47,mut64,mut66,mut76	G

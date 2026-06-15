@@ -1,0 +1,12 @@
+node_id	parent_id	mutations
+ROOT	ROOT	
+1	ROOT	mut0,mut2,mut7,mut8,mut9,mut10,mut13,mut16,mut20,mut21,mut22,mut24,mut25,mut26,mut27,mut30,mut32,mut33,mut35,mut39,mut40,mut41,mut44,mut48,mut50,mut56,mut57,mut60,mut64,mut65,mut66,mut72,mut73,mut76,mut77,mut80,mut81,mut82,mut85,mut86,mut88,mut89,mut90,mut91,mut95,mut96,mut98,mut99,mut100,mut101,mut102,mut103,mut105,mut106,mut109,mut110,mut113,mut114,mut115,mut116,mut117,mut120,mut124,mut125,mut127,mut131,mut132,mut133,mut137,mut138,mut141,mut144,mut146,mut148,mut150,mut153,mut154,mut155,mut158,mut160,mut168,mut169,mut171,mut175,mut176,mut177,mut179,mut182,mut183,mut184,mut185,mut187,mut188,mut189,mut191,mut192,mut194,mut195,mut196,mut199,mut201,mut203,mut204,mut205,mut207,mut212,mut213,mut214,mut217,mut219,mut220,mut224
+3	1	mut6,mut18,mut28,mut34,mut46,mut53,mut58,mut62,mut68,mut71,mut83,mut84,mut118,mut121,mut129,mut135,mut152,mut170,mut172,mut173,mut178,mut190,mut206
+2	3	mut4,mut14,mut15,mut17,mut19,mut31,mut36,mut38,mut42,mut43,mut51,mut52,mut79,mut92,mut104,mut119,mut143,mut145,mut159,mut162,mut163,mut164,mut181,mut193,mut211
+4	ROOT	mut3,mut63,mut78,mut93,mut107,mut112,mut123,mut128,mut140,mut149,mut151,mut161,mut180,mut208,mut210,mut218,mut223
+5	ROOT	mut5,mut23,mut37,mut55,mut69,mut74,mut94,mut97,mut122,mut166,mut167,mut174,mut186,mut202,mut209,mut215,mut221
+6	5	mut49,mut61,mut67,mut70,mut108,mut126,mut130,mut157,mut216,mut222
+7	1	mut45,mut59,mut134,mut136,mut147,mut197
+8	6	mut11,mut12,mut54,mut87,mut111
+9	ROOT	mut1,mut139,mut142,mut165,mut200
+10	ROOT	mut29,mut47,mut75,mut156,mut198

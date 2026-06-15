@@ -1,0 +1,4 @@
+nd	6	mut175,mut196,mut234,mut238,mut248,mut279,mut37,mut49,mut62,mut85	F
+nd	3	mut113,mut122,mut134,mut14,mut147,mut157,mut158,mut166,mut205,mut213,mut217,mut223,mut226,mut235,mut236,mut244,mut26,mut262,mut263,mut267,mut268,mut28,mut284,mut287,mut294,mut301,mut305,mut306,mut35,mut40,mut67,mut91,mut94	F
+nd	3	mut113,mut122,mut134,mut14,mut147,mut157,mut158,mut166,mut205,mut213,mut217,mut223,mut226,mut235,mut236,mut244,mut26,mut262,mut263,mut267,mut268,mut28,mut284,mut287,mut294,mut301,mut305,mut306,mut35,mut40,mut67,mut91,mut94	G
+nd	6	mut175,mut196,mut234,mut238,mut248,mut279,mut37,mut49,mut62,mut85	G

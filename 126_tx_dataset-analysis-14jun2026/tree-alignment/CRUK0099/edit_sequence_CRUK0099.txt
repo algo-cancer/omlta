@@ -1,0 +1,20 @@
+ld	6	mut129	F
+ld	6	mut129	G
+ld	6	mut236	F
+ld	6	mut236	G
+ld	6	mut263	F
+ld	6	mut263	G
+ld	6	mut282	F
+ld	6	mut282	G
+ld	6	mut287	F
+ld	6	mut287	G
+ld	6	mut326	F
+ld	6	mut326	G
+ld	6	mut393	F
+ld	6	mut393	G
+ld	6	mut394	F
+ld	6	mut394	G
+ld	6	mut408	F
+ld	6	mut408	G
+nd	6		F
+nd	6		G

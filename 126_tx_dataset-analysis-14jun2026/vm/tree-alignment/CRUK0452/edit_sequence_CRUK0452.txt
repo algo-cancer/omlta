@@ -1,0 +1,22 @@
+nd	5	mut149,mut23,mut265,mut276,mut307,mut317,mut394,mut404	F
+ld	6	mut155	F
+ld	6	mut155	G
+ld	6	mut163	F
+ld	6	mut163	G
+ld	6	mut182	F
+ld	6	mut182	G
+ld	6	mut227	F
+ld	6	mut227	G
+ld	6	mut267	F
+ld	6	mut267	G
+ld	6	mut323	F
+ld	6	mut323	G
+ld	6	mut352	F
+ld	6	mut352	G
+ld	6	mut63	F
+ld	6	mut63	G
+nd	6		F
+nd	6		G
+nd	7	mut125,mut164,mut248,mut275,mut291,mut316,mut334	F
+nd	5	mut149,mut23,mut265,mut276,mut307,mut317,mut394,mut404	G
+nd	7	mut125,mut164,mut248,mut275,mut291,mut316,mut334	G
