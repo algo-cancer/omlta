@@ -40,6 +40,8 @@ class Node():
     def __copy__(self):
         return Node(self.key, self.parent, self.child.copy(), self.label.copy())
 
+#Given a tree rooted at r and the key of a node to delete,
+#the procedure delete_node removes the node with name key
 def delete_node(r, key):
     nodes = deque([r])
     curr = nodes.pop()
@@ -47,49 +49,19 @@ def delete_node(r, key):
     while curr.key != key and nodes:
         curr = nodes.pop()
         nodes.extend(curr.child)
+    #find the node to remove    
     if curr.key == key:
+        #remove the node from the list of children in its parent
         curr.parent.child.remove(curr)
+        #for each child of the node to be removed change the parent to
+        #be the former grandparent
         for c in curr.child:
             c.parent = curr.parent
             curr.parent.child.append(c)
-   
-def delete_label(r, l, key):
-    #print(l, key)
-    nodes = deque([r])
-    curr = nodes.pop()
-    nodes.extend(curr.child)
-    while curr.key != key and nodes:
-        curr = nodes.pop()
-        nodes.extend(curr.child)
-    #print("Curr key ", curr.key, " with curr label ", curr.label)
-    if curr.key == key and l in curr.label:
-        curr.label.remove(l)
 
-def expand_node(r, key, l):
-    nodes = deque([r])
-    curr = nodes.pop()
-    nodes.extend(curr.child)
-    while curr.key != key and nodes:
-        curr = nodes.pop()
-        nodes.extend(curr.child)
-    if curr.key == key:
-        curr.expanded = curr.expanded + 1
-        new_node = Node(curr.key + '-' + str(curr.expanded))
-        if curr.parent != None:
-            curr.parent.child.remove(curr)
-            curr.parent.child.append(new_node)
-        new_node.child.append(curr)
-        new_node.parent = curr.parent
-        curr.parent = new_node
-        curr.label = remove_sorted(curr.label, l)
-        new_node.label = concat_sorted(new_node.label, l)
-
-    
-def print_tree(root: Node):
-    q = deque()
-    print(root)
-    
-
+#The size of a subtree is defined as the number of nodes in that subtree including the root
+#The procedure compute_sizes recursively fills in the size field for every node in the
+#tree rooted at root
 def compute_sizes(root: Node):
     if len(root.child) == 0:
         return 1
@@ -97,7 +69,9 @@ def compute_sizes(root: Node):
     for c in root.child:
         root.size += compute_sizes(c)
     return root.size
-    
+
+#The procedure sorted_intersection computes the intersection of two sorted lists l1 and l2
+#The list that is the intersection is returned
 def sorted_intersection(l1, l2):
     if not l1 or not l2:
         return []
@@ -115,6 +89,8 @@ def sorted_intersection(l1, l2):
             j += 1
     return intersection  
 
+#remove_sorted takes two sorted lists l and r and
+#returns a "copy" of l in which all elements that are in r have been deleted
 def remove_sorted(l, r):
     i = 0
     j = 0
@@ -133,6 +109,8 @@ def remove_sorted(l, r):
         i += 1
     return new_l      
 
+#concat_sorted takes two sorted lists l and a and returns a sorted lists that combines them
+#if an element appears one time each in both l and and a, it will appear twice in the returned list
 def concat_sorted(l, a):
     i = 0
     j = 0
@@ -146,6 +124,9 @@ def concat_sorted(l, a):
             j += 1
     return new_l
 
+
+#post_order traverses the nodes of a tree and returns a list of the nodes
+# such that a parent node appears after its children, which is sometimes called postfix order
 def post_order(r):
     post = []
     q = deque([r])
@@ -156,6 +137,8 @@ def post_order(r):
     post.reverse()
     return post
 
+#compute_labels takes one argument, which is a labeled tumor phylogenetic tree, r and
+# it returns a list of the labels occurring in any node of the tree
 def compute_labels(r):
     nodes = deque([r])
     labels = []
@@ -166,32 +149,47 @@ def compute_labels(r):
             labels.append(l)
     return labels
 
+#The procedure compute_differences identifies the symmetric difference of the
+#label sets of two labeled rooted trees. r_F and r_G are the root nodes
+#The result is returned as a list in the local variable difference 
 def compute_differences(r_F, r_G):
     nodes = deque([r_F])
-    #Find the difference in the label sets of F and G
+    #labels_F stores the labels in the tree whose root is r_F
     labels_F = []
     while nodes:
         curr = nodes.popleft()
         nodes.extend(curr.child)
         labels_F.extend(curr.label)
     nodes = deque([r_G])
+    #labels_G stores the labels in the tree whose root is r_G    
     labels_G = []
     while nodes:
         curr = nodes.popleft()
         nodes.extend(curr.child)
         labels_G.extend(curr.label)
+    #first compute the labels in labels_F but not in labels_G     
     difference = list(set(labels_F) - set(labels_G))
+    #add to difference the labels in labels_G but not in labels_F         
     difference.extend(list(set(labels_G) - set(labels_F)))
     return difference
     
-
+#Given two rooted trees r_F and r_G and a symmetric difference, diff_list
+#of the labels in the two trees, the procedure remove_differences
+#modifies r_F and r_G to remove the unique labels
+#The return value is the sum of the number of labels removed from
+#the two trees
 def remove_differences(r_F, r_G, diff_list):
     removed_count = 0
+    #iterate over the nodes in the tree rooted at r_F
     nodes = deque([r_F])
     while nodes:
+        #curr is the current node
         curr = nodes.popleft()
         nodes.extend(curr.child)
         i = 0
+        #how the removal is done depends on whether the removed lable is or is not the
+        #last remaining label in the node curr
+        #if the last remaining label is removed then the node should be deleted
         for l in range(len(curr.label)):
             if curr.label[i] in diff_list and len(curr.label) > 1:
                 curr.label.remove(curr.label[i])
@@ -201,6 +199,7 @@ def remove_differences(r_F, r_G, diff_list):
                 delete_node(r_F, curr.key)
             else:
                 i = i + 1
+    #do the same removal algorithm for tree rooted at r_G
     nodes = deque([r_G])
     while nodes:
         curr = nodes.popleft()
@@ -217,7 +216,8 @@ def remove_differences(r_F, r_G, diff_list):
                 i = i + 1
     return removed_count
     
-#Given a node, finds the nearest branching descendant and returns path to it (inclusive)
+#Given a node v, finds the nearest branching descendant and returns path to it (inclusive)
+#and also returns the descendant
 def nearest_branching(v):
     path = [v]
     curr = v
@@ -227,13 +227,21 @@ def nearest_branching(v):
     return path, curr
     
 #Can be improved by searching children more explicitly
-#Note that node expansion requires considering non-branching nodes separately  
+#Note that node expansion requires considering non-branching nodes separately
+#check_if_eq takes two arguments, which are rooted trees, r_F and r_G, and
+#it actually computes a distance in the two-dimensional list variable con_dist
+#and returns the value con_dist[r_F.key][r_G.key]
+#
 def check_if_eq(r_F, r_G):
     #print("Check if eq", file=f_wr)
+    #get lists of nodes in F and g in postfix order
     post_F = post_order(r_F)
     post_G = post_order(r_G)
+    #declare the two-dimenasional list con_dist one of whose entries will be returned
+    #con_dist is short for constraint distance
     con_dist = {}
     for u in post_F:
+        #declare the second dimension of con_dist for each value along the first dimension
         con_dist[u.key] = {}
         for v in post_G:   
             #If u or v are non-branching nodes, check if expansions lead to label matches
@@ -244,6 +252,8 @@ def check_if_eq(r_F, r_G):
                 i_G = 0
                 count_F = 0
                 count_G = 0
+                #find the next node in each subtree that has a non-empty label field
+                #i_F is an index for tree F and i_G is an index for tree G
                 while i_F != len(nb_F) and i_G != len(nb_G):
                     while i_F != len(nb_F) and len(nb_F[i_F].label) == 0:
                         i_F = i_F + 1
@@ -251,6 +261,7 @@ def check_if_eq(r_F, r_G):
                         i_G = i_G + 1
                     if i_F == len(nb_F) or i_G == len(nb_G):
                         break
+                    #check whether all labels are shared between the node in F and the node in G
                     shared = sorted_intersection(nb_F[i_F].label, nb_G[i_G].label)
                     count_F = count_F + len(shared)
                     count_G = count_G + len(shared)
@@ -262,7 +273,8 @@ def check_if_eq(r_F, r_G):
                     if len(nb_G[i_G].label) == count_G:
                         i_G = i_G + 1
                         count_G = 0
-                        
+
+                #skip over any additional nodes that have empty label sets        
                 while i_F != len(nb_F) and len(nb_F[i_F].label) == 0:
                         i_F = i_F + 1
                 while i_G != len(nb_G) and len(nb_G[i_G].label) == 0:
@@ -314,25 +326,29 @@ def check_if_eq(r_F, r_G):
 #L_F and L_G are just dictionaries where keys are labels and an entry is the node with that label
 #just used for a non-asymptotic speedup (could do a search through the tree instead for it)
 #Returns 0, 1, or 2 if the passed forests are equal, off by 1 label, or different beyond a single label
-#When 1 is returned, also returns the node with the label not shared between F and G as well as the label that is not shared 
+#When 1 is returned, also returns the node with the label not shared between F and G as well as the label that is not shared
+#L1 and L2 are dictionaries that map a label to the node that has that label
 def check_dist_two(roots_F, roots_G, L1, L2):
     # Create a virtual root if either F or G is a forest to make them trees (virtual roots have empty labels so trivially they will match)
     if not isinstance(roots_F, list):
         roots_F = [roots_F]
     if not isinstance(roots_G, list):
         roots_G = [roots_G]
-    
+
+    #this is a base case in which at least one of the trees is empty    
     if len(roots_F) == 0 or len(roots_G) == 0:
         if len(roots_F) == 0 and len(roots_G) == 0:
             return 0, None
         else:
             return 2, None
-    
+
+    #in this case each of F and G is a forest with more than one tree    
     if len(roots_F) > 1 and len(roots_G) > 1:
         r_F = Node('-1')
         r_F.child = roots_F
         r_G = Node(-1)
         r_G.child = roots_G
+    #in this case one is a tree and the the other is a multi-tree forest, so they cann be equal        
     elif len(roots_F) > 1 or len(roots_G) > 1:
         return 2, None
     else:
@@ -352,9 +368,11 @@ def check_dist_two(roots_F, roots_G, L1, L2):
         curr = nodes.popleft()
         nodes.extend(curr.child)
         labels_G.extend(curr.label)
+    #first, compute the set of labels in F but not in G        
     difference = list(set(labels_F) - set(labels_G))
+    #second, add the set of labels in G but not in F
     difference.extend(list(set(labels_G) - set(labels_F)))
-    #If differences are at most 1, check for equality after removing the difference if it exists, otherwise return immediately
+    #If number of differences is at most 1, check for equality of the trees after removing the difference if it exists, otherwise return immediately
     if len(difference) == 1:
         if len(labels_F) > len(labels_G):
             diff_node = L1[difference[0]]
@@ -377,9 +395,18 @@ def check_dist_two(roots_F, roots_G, L1, L2):
     else:
         return len(difference), None
 
-
+#The procedure forest_helper handles the parts of the MLTD computation in
+#which at least one fo the two entities being aligned, F_1 and F_2 is a
+#forest with more than one tree
+#target is a labelled node at highest level and is guaranteed to be in F_1
+#d is the current candidate distance
+#L_1 and L_2 are dictionaries that map the labels to nodes in F_1 and F_2
+#S is the current (likely partial) edit/alignment sequence
+#forest_helper is in a mutually recursive lopp with MLTDv2
 def forest_helper(F_1, F_2, target, d, L_1, L_2, S):
+    #start with the first label in the target node, which is in L_1
     l = target.label[0]
+    #test whether the label is also in L_2
     if l in L_2:
         match = L_2[l]
         shared = sorted_intersection(target.label, match.label)
@@ -420,7 +447,7 @@ def forest_helper(F_1, F_2, target, d, L_1, L_2, S):
                 #if temp_dist < min_dist:
                 #    min_dist = temp_dist
                 #    min_S = temp_S
-        else:
+        else:  #len(target.label) > 0 and we need to call recursively 
             min_dist, min_S = MLTDv2(F_1, F_2, d + 1, L_1, L_2, S.copy())
         target.label = concat_sorted(target.label, [l])
         S.pop()
@@ -561,7 +588,7 @@ def forest_helper(F_1, F_2, target, d, L_1, L_2, S):
                 return min_dist, min_S        
             else:
                 #Only target is a root, match is in a root's subtree of F_2
-                #In this case, find highest unlabeled node and try top delete all nodes in path to root above it to match the "target" and "match" nodes together
+                #In this case, find highest unlabeled node and try to delete all nodes in path to root above it to match the "target" and "match" nodes together
                 highest_empty_node = match
                 curr = match.parent
                 while curr != r_2.parent:
@@ -653,7 +680,7 @@ def forest_helper(F_1, F_2, target, d, L_1, L_2, S):
                         prev = deleted
                         deleted = deleted.parent
                     F_2.remove(r_2)
-                    #If highest empty labelled node is not a root, then we've deleted nodes on the path to the root and we should match "target" and "match" nodes together, delete the shared labels from "target", or delete "target"
+                    #If highest empty labeled node is not a root, then we've deleted nodes on the path to the root and we should match "target" and "match" nodes together, delete the shared labels from "target", or delete "target"
                     F_1.remove(target)
                     temp_dist, temp_S = MLTDv2(target, highest_empty_node, d + label_count, L_1, L_2, S.copy())
                     min_dist, min_S = MLTDv2(F_1, F_2, temp_dist, L_1, L_2, temp_S)
@@ -775,17 +802,27 @@ def forest_helper(F_1, F_2, target, d, L_1, L_2, S):
                         min_dist = temp_dist
                         min_S = temp_S    
             return min_dist, min_S
-                
+
+#this is the key procedure to compute the distance and the alignmenet both of which are returned.
+#T_F and T)G are the two trees
+#d is a lower bound on the distance; the global variable k is the candidate upper bound
+#L_F and L_G are dictionaries that map labels to nodes that have those labels
+#S is a partially built alignment (edit) sequence as a list;
+#eventually the correct d and the full S will be returned as a pair
+#The procedure MLTDv2 is recursive
 def MLTDv2(T_F, T_G, d, L_F, L_G, S):
     if not isinstance(T_F, list):
         T_F = [T_F]
     if not isinstance(T_G, list):
         T_G = [T_G]
+    #One invariant is that the candidate distance value d must be <= the current global upper bound k    
     if d > k:
         return k + 1000, S
 
     #print(len(T_F), len(T_G))
 
+    #if F is empty, then the rest of the alignment is achieved by deleting every label in G
+    #the distance returned is incremented by the number of labels in G
     if len(T_F) == 0:
         dist = d
         for r in T_G:
@@ -797,6 +834,8 @@ def MLTDv2(T_F, T_G, d, L_F, L_G, S):
             return k + 1000, S
         else:
             return dist, S
+        
+    #This is the symmetric case in which G is empty    
     elif len(T_G) == 0:
         dist = d
         for r in T_F:
@@ -814,11 +853,13 @@ def MLTDv2(T_F, T_G, d, L_F, L_G, S):
         r_F = T_F[0]
         r_G = T_G[0]
         shared = sorted_intersection(r_F.label, r_G.label)
+        #In this case all labels are shared between the two tree roots
         if len(shared) == len(r_F.label) and len(shared) == len(r_G.label):
             #perfect match
-            #Issue with extension if one node is a single child and one is a branching node, may be optimal to extend multi-branch node into empty node and delete child label or instead it may be optimal to not extend and just delete non-branching node or let it be matched to one of the branching children (and delete remaining children) - note thi shappens in not just the case this comment is contained in
+            #Issue with extension if one node is a single child and one is a branching node, may be optimal to extend multi-branch node into empty node and delete child label or instead it may be optimal to not extend and just delete non-branching node or let it be matched to one of the branching children (and delete remaining children) - note this happens in not just the case this comment is contained in
             min_dist, min_S = MLTDv2(r_F.child, r_G.child, d, L_F, L_G, S.copy())
             return min_dist, min_S
+        #In this case, every label in the root of F is also in the root of G but the root of G has at least one extra label and that has to be removed
         elif len(shared) == len(r_F.label):
             r_G.label = remove_sorted(r_G.label, shared)
             S.append(('ne', r_G.key, shared))
@@ -826,6 +867,7 @@ def MLTDv2(T_F, T_G, d, L_F, L_G, S):
             S.pop()
             r_G.label = concat_sorted(r_G.label, shared)
             return min_dist, min_S
+        #In this case, every label in the root of G is also in the root of F but the root of F has at least one extra label and that has to be removed        
         elif len(shared) == len(r_G.label):
             r_F.label = remove_sorted(r_F.label, shared)
             S.append(('ne', r_F.key, shared))
@@ -833,6 +875,7 @@ def MLTDv2(T_F, T_G, d, L_F, L_G, S):
             S.pop()
             r_F.label = concat_sorted(r_F.label, shared)
             return min_dist, min_S
+        #In this 'else' case, each tree root has at least one label that the other tree root does not have 
         else:
             #delete either root
             if len(shared) > 0:
@@ -842,14 +885,17 @@ def MLTDv2(T_F, T_G, d, L_F, L_G, S):
                 r_G.label = remove_sorted(r_G.label, shared)
                 S.append(('ne', r_G.key, shared))                
 
+            #remove extra label(s) from F and call recursively with the same G and a smaller F    
             S.append(('nd', r_F.key, r_F.label))
             min_dist, min_S = MLTDv2(r_F.child, [r_G], d + len(r_F.label), L_F, L_G, S.copy())
             S.pop()
             #r_G.label = concat_sorted(r_G.label, shared)
             #r_F.label = remove_sorted(r_F.label, shared)
             S.append(('nd', r_G.key, r_G.label))
+            #remove extra label(s) from G and call recursively with the same F and a smaller G                
             temp_dist, temp_S = MLTDv2([r_F], r_G.child, d + len(r_G.label), L_F, L_G, S.copy())
 
+            #compare the two alternatives of smaller F and smaller G and select the one with lesser distance
             if temp_dist < min_dist:
                 min_dist = temp_dist
                 min_S = temp_S
@@ -865,7 +911,8 @@ def MLTDv2(T_F, T_G, d, L_F, L_G, S):
                 S.pop()
 
             return min_dist, min_S
-        
+
+    #The else clause below handles the situation in which at least one of F and G is a forest with more than one tree    
     else:
         # Find the labelled node at the highest level in remaining trees
         nodes = deque(T_F + T_G)
@@ -885,24 +932,38 @@ def MLTDv2(T_F, T_G, d, L_F, L_G, S):
         r = labeled
         while r not in T_F and r not in T_G:
             r = r.parent
+        #The order of parameters to forest_helper depends on which tree in either forest contains the labelled node at highest level     
         if r in T_F:
             min_dist, min_S = forest_helper(T_F, T_G, labeled, d, L_F, L_G, S.copy())
             return min_dist, min_S
         else:
             min_dist, min_S = forest_helper(T_G, T_F, labeled, d, L_G, L_F, S.copy())
             return min_dist, min_S
-            
-def shell(root_F, root_G, L_F, L_G):  
+
+#shell is the high-level procedure to compute omltd
+#The two trees are represented by root_F and root_G
+def shell(root_F, root_G, L_F, L_G):
+    #The symbol k denotes the distance
+    #In this implementation, the upper-bound on the distance is doubled until the actual distance
+    #turns out to be less than or equal to the current upper bound
     k_values = [16, 32, 64, 128, 256, 512, 1024, 2048, 4096, 8192]
     i = 0
 
+    #compute the symmetric difference of the label sets of the trees rooted at root_F and root_G
     diff_list = compute_differences(root_F, root_G)
+    #remove any labels that appear in exactly one of the two trees, and modify root_F and root_G
     pre_edits = remove_differences(root_F, root_G, diff_list)
+
+    #set the candidate upper bound k as a global variable, so that it can be accessed in other
+    #procedures called directly or indirectly from shell
     while i < len(k_values):
         global k
         k = k_values[i]
         print("Checking k =  ", k)
+        #call MLTDv2, which does the next layer of the computation
+        #start the first attempt with the candidate distance as 0 (third argument) and the initial alignment/edit list as empty (sixth argument)
         d, S = MLTDv2(root_F, root_G, 0, L_F, L_G, [])
+        #print results to the terminal
         print("Finished k = ", k)
         if d <= k:
             print("Minimum cost edit sequence: ")
@@ -913,11 +974,20 @@ def shell(root_F, root_G, L_F, L_G):
             print("Normalized omltd: ", (d/(2*len(shared_labels))))
             break
         i = i + 1
-
-    if args.o:
-        f_edits_out = args.o 
-        with open(f_edits_out, 'wb') as handle:
-            pickle.dump((S, ntl), handle)
+        
+    #If the user specifies the optional output file, 
+    #write the edit sequence S to the provided output file location
+    if args.outputfile:
+        f_edits_out = args.outputfile
+        #If the user specifies the pickle file option, writes S
+        #as a pickle representation.
+        #Otherwise, writes S as a string.
+        if args.pi:
+            with open(f_edits_out, 'wb') as handle:
+                pickle.dump((S, ntl), handle)
+        else:
+            with open(f_edits_out, 'w') as handle:
+                handle.write(str(S))
 
     l_deleted = np.empty(int(d/2), dtype='U128')
     del_i = 0
@@ -932,27 +1002,34 @@ def shell(root_F, root_G, L_F, L_G):
 
     #print(f"Set of ({len(l_deleted)}) labels deleted: ", ", ".join(l_deleted))
     return d
-    
+
+#code executation starts here
 if __name__ == '__main__':
 
     path = os.path.dirname(os.path.abspath(__file__))
     #path += "/"
     path += "\\"
+    #read the command-line arguments
     parser = argparse.ArgumentParser("Description: compute OMLTED between two trees stored in files")
     parser.add_argument('-pi', help="read trees in from pickle file", action='store_true')
-    parser.add_argument('-o', help="output tree edits file", action='store_true')
+    parser.add_argument('-o', '--outputfile', action='store', help="output tree edits file")
     parser.add_argument("tree_file_1", help="the file name of the first file to read", type=str)
     parser.add_argument("tree_file_2", help="the file name of the second file to read", type=str)
     args = parser.parse_args()
 
+    #print the available command-line arguments
     print(args)
 
+    #if trees are to be read in from a pickle file
     if args.pi:
         n = 1
         ltn = {}
         ntl = {}
         with open(path + args.tree_file_1, 'rb') as f:
             F = pickle.load(f)
+            #extract the nodes and edges from the entity F
+            #build up one node and edge at a time to get the
+            #internal representation of the rooted tree root_F
             V_F = list(F.nodes)
             E_F = list(F.edges)
             A_F = {}
@@ -969,12 +1046,15 @@ if __name__ == '__main__':
                 A_F[e[0]].child.append(A_F[e[1]])
                 A_F[e[1]].parent = A_F[e[0]]
             r_F = []
+            #locate the root as the node that has None as its parent
             for v in V_F:
                 if A_F[v].parent is None:
                     r_F.append(A_F[v])
             root_F = r_F[0]
 
         with open(path + args.tree_file_2, 'rb') as f:
+            #extract the nodes and edges from the pickle entity G
+            #to build up the rooted tree root_G
             G = pickle.load(f)
             V_G = list(G.nodes)
             E_G = list(G.edges)
@@ -997,6 +1077,8 @@ if __name__ == '__main__':
                     r_G.append(A_G[v])
             root_G = r_G[0]
 
+        #build dictionaries L_F and L_G that
+        #map the labels in F and G respectively to their corresponding nodes
         nodes = deque([root_F])  
         L_F = {}
         while nodes:
@@ -1017,9 +1099,10 @@ if __name__ == '__main__':
                 L_G[str(ltn[l])] = curr
                 curr.label.remove(l)
                 curr.label = concat_sorted(curr.label, [str(ltn[l])])
-    else:
+    else:  #read the two trees from text files
         curr_f = open(args.tree_file_1, "r")
         Lines = curr_f.readlines()
+        #build up the set of nodes of the first tree F
         nodeset = {}
         for line in Lines:
             node_info = line.split()
@@ -1032,7 +1115,8 @@ if __name__ == '__main__':
                 else:
                     root_F = new_node
                     new_node.label.append('-1')
-                    
+
+        #set up the parent-child relationships in tree F                                
         for line in Lines:
             node_info = line.split()
             if node_info[0] != 'node_id' and node_info[0] != 'ROOT':
@@ -1043,7 +1127,9 @@ if __name__ == '__main__':
                 else:
                     curr.parent = nodeset[int(node_info[1])]
                     curr.parent.child.append(curr)
-                
+
+        #build a dictionary L_F that
+        #maps the labels in F to their corresponding nodes
         nodes = deque([root_F])  
         L_F = {}
 
@@ -1053,6 +1139,9 @@ if __name__ == '__main__':
             l_copy = curr.label.copy()
             for l in l_copy:
                 L_F[l] = curr
+
+        #repeat for the second tree G what was done for the first tree F
+        #the dictionary that maps labels in G to nodes is called L_G
         curr_f = open(args.tree_file_2, "r")
         nodeset = {}        
         Lines = curr_f.readlines()
@@ -1067,7 +1156,7 @@ if __name__ == '__main__':
                 else:
                     root_G = new_node
                     new_node.label.append('-1')
-                    
+        #set up the parent-child relationships in tree G            
         for line in Lines:
             node_info = line.split()
             if node_info[0] != 'node_id' and node_info[0] != 'ROOT':
@@ -1087,5 +1176,6 @@ if __name__ == '__main__':
             l_copy = curr.label.copy()
             for l in l_copy:
                 L_G[l] = curr
-                
+
+    #call the upper-level procedure to compare the trees L_F and L_G            
     shell(root_F, root_G, L_F, L_G)

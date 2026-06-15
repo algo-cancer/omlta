@@ -8,19 +8,28 @@ omlta.py requires two text files each specifying one of the two input trees. The
 
 The root node id should be ROOT with parent None.
 
-The labels should be comma-separated, no white space.  See example-tree1.txt and example-tree2.txt for an example.
+Labels do not need to be shared between the two trees. Each node except the root node in an input tree **must** have **at least one** label, and each label may appear in each input tree **at most once** per tree. Any labels unique to only one of the input tree files are removed by the omlta.py algorithm in a pre-processing step.
 
-Labels do not need to be shared between the two trees.  Any labels unique to only one of the input tree files are removed by the OMLTED.py algorithm in a pre-processing step.
+The labels should be comma-separated, no white space.  See [example-tree1.txt](https://github.com/algo-cancer/omlta/blob/main/example-tree1.txt) and [example-tree2.txt](https://github.com/algo-cancer/omlta/blob/main/example-tree2.txt) for an example.
+
+## Installation
+This script is made in Python 3.  Installation should take no more than 5 minutes using the provided .yml to create the conda environment as follows:
+
+```conda env create -f environment.yml```
 
 ## Usage
 
-This script is made in Python 3. To run the omlta/omltd implementation:
+To run the omlta/omltd implementation in the omlta conda environment, first activate the environment as follows:
+
+```conda activate omlta ```
+
+Then, navigate to the directory containing the omlta.py script and tree input files, and run the following:
 
 ```python omlta.py tree-file1 tree-file2```
 
 Sample execution on the included example tree files:
 ```
-C:\OMLTED python omlta.py example-tree1.txt example-tree2.txt
+C:\omlta python omlta.py example-tree1.txt example-tree2.txt
 Checking k =   16
 Finished k =  16
 Minimum cost edit sequence:
@@ -29,9 +38,9 @@ Non-common labels deleted in pre-processing:  0
 omltd:  10
 Normalized omltd:  0.29411764705882354
 ```
-
+Execution of the example trees took .01 seconds.
 ## Output
-The output includes four things. We discuss them in the order they are output (see example above).
+The output includes four main pieces of information. We discuss them in the order they are output (see example above).
 
 1. A minimum cost edit sequence on the two input forests. The sequence is provided as a list of tuples.  The first element of the tuple corresponds to the type of edit.  'nd' - node deletion, 'ne' - node expansion, 'ld' - label deletion.  The second element of the tuple is the key of the node used to identify which node in the tree is being edited.  The third element of the tuple is the set of labels either being expanded or deleted.
 
@@ -41,4 +50,9 @@ The output includes four things. We discuss them in the order they are output (s
 
 
 4. The normalized omltd distance, i.e., the omlta distance divided by the total number of labels in the two input forests after pre-processing. 
+
+
+
+
+
 
