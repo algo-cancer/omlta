@@ -1,7 +1,7 @@
 # omlta/omltd
 
 This repository contains an implementation of omlta, the optimal multi-label tree alignment problem, and omltd, the optimal multi-label tree edit distance. The provided script computes both the minimum cost edit sequence for the alignment as well as the distance between two input trees.
-
+[![DOI](https://zenodo.org/badge/1464658408.svg)](https://doi.org/10.5281/zenodo.24379958)
 ## Input
 
 omlta.py requires two text files each specifying one of the two input trees. The format of the text files is three columns separated by whitespace: a node id, the node's parent id, and a list of the labels of the node.
